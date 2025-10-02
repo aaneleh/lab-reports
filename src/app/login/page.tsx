@@ -19,7 +19,7 @@ export default function Login() {
             await login(formData); //TODO Criar um type para usuário e utilizar em todo lugar q deveria
             redirect('/');
           }}>
-            <label htmlFor="usuario"> {/* //TODO Transof */}
+            <label htmlFor="usuario"> {/* //TODO Transformar input em um componente genérico para usar o state passwordVisible */}
                 <p>Usuário</p>
                 <input className="login_input" type="text" name="usuario" placeholder="Seu nome de usuário"/>
             </label>
