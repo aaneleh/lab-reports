@@ -7,9 +7,10 @@
 
 ## TODO
 
-⬜ Rota e chamada de login  
+🟨 Rota e chamada de login  
 ⬜ Criar type para users  
 ⬜ Criar componente geral para input e refatorar form de login  
+✅ Rotas cadastro e exclusão de usuários
 ✅ Conexão com banco de dados  
 ✅ Sessão ao realizar login  
 ✅ Layout e organização das páginas  
