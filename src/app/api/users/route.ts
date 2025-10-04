@@ -15,7 +15,7 @@ export async function GET(){
     )
     
   } catch(err){
-    console.error("Error deleting users: ", err); 
+    console.error("Error fetching users: ", err); 
 
     return NextResponse.json(
       { message: "Error fetching users" },

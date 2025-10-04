@@ -1,10 +1,11 @@
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { default as axios } from 'axios';
 
 const SESSION_KEY = new TextEncoder().encode(process.env.SESSION_KEY);
 
-export async function encrypt(payload: any){
+async function encrypt(payload: any){
     return await new SignJWT(payload)
         .setProtectedHeader({alg: 'HS256'})
         .setIssuedAt()
@@ -12,22 +13,41 @@ export async function encrypt(payload: any){
         .sign(SESSION_KEY)
 }
 
-export async function decrypt(input: string): Promise<any> {
+async function decrypt(input: string): Promise<any> {
     const { payload } = await jwtVerify(input, SESSION_KEY, {
         algorithms: ['HS256'],
     })
     return payload;
 }
 
+
+async function checkUser(user : any, password : any): Promise<string | null>{
+    let uuid: string | null = null; 
+
+    await axios.post(`${process.env.API_URL}/login`, {
+        name: user,
+        password: password
+    }).then((res) => {
+        console.log("data", res.data)
+        uuid = res.data.data;
+    }).catch((err) => {
+        console.log("err",err.status)
+    })
+    
+    return uuid;
+}
+
 export async function login(formData: FormData){
-    console.log(formData);
-    const user = { usuario: formData.get('usuario'), senha: formData.get('senha')};
-    //TODO Consultar banco de dados para validar usuário
+    const user = { name: formData.get('usuario'), password: formData.get('senha')};
+    const uuid = await checkUser(user.name, user.password);
 
+    if(uuid == null) return false;
+    
     const expires = new Date(Date.now() + 10 * 1000);
-    const session = await encrypt({user, expires});
-
+    const session = await encrypt({uuid, user, expires});
+    
     (await cookies()).set('session', session, {expires, httpOnly: true});
+    return true;
 }
 
 export async function logout() {

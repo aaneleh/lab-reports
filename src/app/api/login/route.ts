@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "../db";
 import bcrypt from "bcryptjs";
+import { QueryResult } from "pg";
 
 const DB_NAME = process.env.DB_NAME;
 
 export async function POST(req:NextRequest){
+    let getUser: QueryResult<any>;
     try {
         const reqbody = await req.json();
 
         const password = reqbody.password;
         const name = reqbody.name;
-        const getUser = await db.query<any>(`SELECT password FROM "${DB_NAME}".users WHERE name=$1`, [name]);
+        getUser = await db.query<any>(`SELECT uuid, password FROM "${DB_NAME}".users WHERE name=$1`, [name]);
         if(getUser.rowCount == null || getUser.rowCount < 1) {
             console.error("User not found: ", getUser); 
             return NextResponse.json(
@@ -18,10 +20,7 @@ export async function POST(req:NextRequest){
                 { status: 404 }
             )
         } 
-
         const hashedPassword = getUser.rows[0].password;
-
-        console.log(hashedPassword)
 
         bcrypt.compare(password, hashedPassword,
             async function (err, isMatch) {
@@ -39,9 +38,8 @@ export async function POST(req:NextRequest){
                         { status: 500 }
                     )
                 }
-
                 return NextResponse.json(
-                    { message: "Login successfull" },
+                    { data: getUser.rows[0].uuid },
                     { status: 200 }
                 )
             }
@@ -56,7 +54,7 @@ export async function POST(req:NextRequest){
     }
 
     return NextResponse.json(
-        { message: "Login successfull" },
+        { data: getUser.rows[0].uuid },
         { status: 200 }
     )
 }
