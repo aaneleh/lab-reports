@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "../db";
 import bcrypt from "bcryptjs";
 import { QueryResult } from "pg";
+import { User } from "@/types/user";
 
 const DB_NAME = process.env.DB_NAME;
 
@@ -9,20 +10,24 @@ export async function POST(req:NextRequest){
     let getUser: QueryResult<any>;
     try {
         const reqbody = await req.json();
+        const user : User = { name: reqbody.name, password: reqbody.password}
 
-        const password = reqbody.password;
-        const name = reqbody.name;
-        getUser = await db.query<any>(`SELECT uuid, password FROM "${DB_NAME}".users WHERE name=$1`, [name]);
+        getUser = await db.query<any>(`SELECT uuid, password FROM "${DB_NAME}".users WHERE name=$1`, [user.name]);
         if(getUser.rowCount == null || getUser.rowCount < 1) {
-            console.error("User not found: ", getUser); 
+            console.error("User not found"/* , getUser */); 
             return NextResponse.json(
                 { message: "User not found" },
                 { status: 404 }
             )
         } 
         const hashedPassword = getUser.rows[0].password;
-
-        bcrypt.compare(password, hashedPassword,
+        if(user.password == null ){
+            return NextResponse.json(
+                { message: "Error comparing password" },
+                { status: 500 }
+            )
+        }
+        bcrypt.compare(user.password, hashedPassword,
             async function (err, isMatch) {
 
                 if (!isMatch) {
@@ -46,9 +51,9 @@ export async function POST(req:NextRequest){
         )
 
     } catch (err){
-        console.error("Error creating user: ", err); 
+        console.error("Error comparing password: ", err); 
         return NextResponse.json(
-            { message: "Error creating user" },
+            { message: "Error comparing password" },
             { status: 500 }
         )
     }

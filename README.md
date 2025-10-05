@@ -7,8 +7,12 @@
 
 ## TODO
 
-⬜ Criar type para users  
-⬜ Criar componente geral para input e refatorar form de login  
+⬜ Checagem se usuário logado é admin
+⬜ Tabela listando todos users
+⬜ Ação de exclusão para users
+⬜ Modal para cadastro de users
+✅ Criar type para users  
+✅ Criar componente geral para input e refatorar form de login  
 ✅ Rota e chamada de login  
 ✅ Rotas cadastro e exclusão de usuários
 ✅ Conexão com banco de dados  

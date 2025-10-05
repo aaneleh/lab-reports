@@ -2,6 +2,7 @@ import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { default as axios } from 'axios';
+import { User } from "@/types/user";
 
 const SESSION_KEY = new TextEncoder().encode(process.env.SESSION_KEY);
 
@@ -21,12 +22,12 @@ async function decrypt(input: string): Promise<any> {
 }
 
 
-async function checkUser(user : any, password : any): Promise<string | null>{
+async function checkUser(user : User): Promise<string | null>{
     let uuid: string | null = null; 
 
     await axios.post(`${process.env.API_URL}/login`, {
-        name: user,
-        password: password
+        name: user.name,
+        password: user.password
     }).then((res) => {
         console.log("data", res.data)
         uuid = res.data.data;
@@ -37,9 +38,8 @@ async function checkUser(user : any, password : any): Promise<string | null>{
     return uuid;
 }
 
-export async function login(formData: FormData){
-    const user = { name: formData.get('usuario'), password: formData.get('senha')};
-    const uuid = await checkUser(user.name, user.password);
+export async function login(user : User){
+    const uuid = await checkUser(user);
 
     if(uuid == null) return false;
     
