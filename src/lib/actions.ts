@@ -22,29 +22,35 @@ async function decrypt(input: string): Promise<any> {
 }
 
 
-async function checkUser(user : User): Promise<string | null>{
-    let uuid: string | null = null; 
+async function checkUser(user : User): Promise<User | null>{
+    let userRes: User | null = null; 
 
     await axios.post(`${process.env.API_URL}/login`, {
         name: user.name,
         password: user.password
     }).then((res) => {
-        console.log("data", res.data)
-        uuid = res.data.data;
+        userRes = {
+            uuid: res.data.data.uuid,
+            name: user.name,
+            admin: res.data.data.admin
+        };
     }).catch((err) => {
         console.log("err",err.status)
     })
     
-    return uuid;
+    return userRes;
 }
 
 export async function login(user : User){
-    const uuid = await checkUser(user);
-
-    if(uuid == null) return false;
+    const userRes = await checkUser(user);
+    
+    if(userRes == null) return false;
+    const uuid = userRes.uuid;
+    const name = userRes.name;
+    const admin = userRes.admin;
     
     const expires = new Date(Date.now() + 10 * 1000);
-    const session = await encrypt({uuid, user, expires});
+    const session = await encrypt({uuid, name, admin, expires});
     
     (await cookies()).set('session', session, {expires, httpOnly: true});
     return true;

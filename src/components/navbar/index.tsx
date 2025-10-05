@@ -4,7 +4,7 @@ import { LuGithub } from "react-icons/lu";
 export default async function Navbar() {
 
   const session = await getSession()
-  const username = session.user.usuario
+  const username = session.name
 
   return (
     <div role="navigation" className="flex justify-between items-center bg-teal-700 text-teal-50 px-6 p-4">

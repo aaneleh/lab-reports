@@ -7,10 +7,10 @@
 
 ## TODO
 
-⬜ Checagem se usuário logado é admin
-⬜ Tabela listando todos users
-⬜ Ação de exclusão para users
+🟨 Tabela listando todos users
 ⬜ Modal para cadastro de users
+⬜ Ação de exclusão para users
+✅ Checagem se usuário logado é admin
 ✅ Criar type para users  
 ✅ Criar componente geral para input e refatorar form de login  
 ✅ Rota e chamada de login  
@@ -29,3 +29,4 @@ DB_PASSWORD
 DB_PORT  
 NODE_ENV  
 API_URL
+NEXT_PUBLIC_API_URL

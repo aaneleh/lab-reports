@@ -12,7 +12,7 @@ export async function POST(req:NextRequest){
         const reqbody = await req.json();
         const user : User = { name: reqbody.name, password: reqbody.password}
 
-        getUser = await db.query<any>(`SELECT uuid, password FROM "${DB_NAME}".users WHERE name=$1`, [user.name]);
+        getUser = await db.query<any>(`SELECT uuid, password, admin FROM "${DB_NAME}".users WHERE name=$1`, [user.name]);
         if(getUser.rowCount == null || getUser.rowCount < 1) {
             console.error("User not found"/* , getUser */); 
             return NextResponse.json(
@@ -44,7 +44,7 @@ export async function POST(req:NextRequest){
                     )
                 }
                 return NextResponse.json(
-                    { data: getUser.rows[0].uuid },
+                    { data: { uuid: getUser.rows[0].uuid, admin: getUser.rows[0].admin} },
                     { status: 200 }
                 )
             }
@@ -59,7 +59,7 @@ export async function POST(req:NextRequest){
     }
 
     return NextResponse.json(
-        { data: getUser.rows[0].uuid },
+        { data: { uuid: getUser.rows[0].uuid, admin: getUser.rows[0].admin} },
         { status: 200 }
     )
 }

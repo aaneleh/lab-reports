@@ -3,7 +3,6 @@ import Input from "@/components/input";
 import { login } from "@/lib/actions";
 import { User } from "@/types/user";
 import { redirect } from "next/navigation";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
 
