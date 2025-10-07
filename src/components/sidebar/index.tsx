@@ -1,4 +1,3 @@
-//'use client'
 import { FaPlus, FaUserGroup, FaDoorOpen } from "react-icons/fa6";
 import { FaClipboardList } from "react-icons/fa";
 import Link from "next/link";
@@ -28,7 +27,7 @@ export default async function Sidebar(props: { className: string }) {
             await logout();
             redirect('/');
           }}>
-            <button type="submit" className="sidebar-item">Sair</button>
+            <button type="submit" className="sidebar-item cursor-pointer">Sair</button>
           </form>
         </div>
     </aside>

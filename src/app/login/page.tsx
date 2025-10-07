@@ -15,7 +15,7 @@ export default function Login() {
           let formName = formData.get('usuario');
           let formPassword = formData.get('senha');
 
-          if(formData.get('usuario') != null && formData.get('senha') != null &&
+          if(formName != null && formPassword != null &&
             typeof formName === "string" && typeof formPassword === "string"
           ){
             const user : User = {name: formName, password: formPassword};

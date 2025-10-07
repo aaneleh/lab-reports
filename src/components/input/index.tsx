@@ -11,7 +11,7 @@ export default function Input(props: { label: string, name: string, placeholder:
             return (
               <label htmlFor={props.name} className="relative">
                   <p>{props.label}</p>
-                  <input className="login_input" type={passwordVisible ? 'text' : 'password'} name={props.name} placeholder={props.placeholder}/>
+                  <input className="login_input" type={passwordVisible ? 'text' : 'password'} name={props.name} id={props.name} placeholder={props.placeholder}/>
                   <span className="absolute top-[38px] right-[6px] select-none hover:bg-teal-100 p-2 rounded" aria-hidden="true" onClick={() => setPasswordVisible(!passwordVisible)}> 
                   {passwordVisible ? 
                       <FaEyeSlash/> :
@@ -24,7 +24,7 @@ export default function Input(props: { label: string, name: string, placeholder:
             return (
               <label htmlFor={props.name} className="relative">
                   <p>{props.label}</p>
-                  <input className="login_input" type='text' name={props.name} placeholder={props.placeholder}/>
+                  <input className="login_input" type='text' name={props.name} id={props.name} placeholder={props.placeholder}/>
               </label>
             );
     }

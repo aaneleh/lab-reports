@@ -8,8 +8,8 @@
 ## TODO
 
 🟨 Tabela listando todos users  
-⬜ Modal para cadastro de users  
-⬜ Ação de exclusão para users  
+🟨 Modal para cadastro de users  
+🟨 Ação de exclusão para users  
 ✅ Checagem se usuário logado é admin  
 ✅ Criar type para users  
 ✅ Criar componente geral para input e refatorar form de login  

@@ -49,7 +49,7 @@ export async function login(user : User){
     const name = userRes.name;
     const admin = userRes.admin;
     
-    const expires = new Date(Date.now() + 10 * 1000);
+    const expires = new Date(Date.now() + 600 * 1000);
     const session = await encrypt({uuid, name, admin, expires});
     
     (await cookies()).set('session', session, {expires, httpOnly: true});
@@ -80,4 +80,18 @@ export async function updateSession(request: NextRequest){
         expires: parsed.expires,
     })
     return res;
+}
+
+export async function createUser(user:User):Promise<boolean> {
+    await axios.post(`${process.env.API_URL}/users`, {
+        name: user.name,
+        password: user.password,
+        admin: user.admin
+    }).then((res) => {
+        console.log(res)
+        return true;
+    }).catch((err) => {
+        console.log("err",err.status)
+    })
+    return false;
 }
