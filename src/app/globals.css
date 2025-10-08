@@ -33,7 +33,7 @@ form {
 }
 
 .main-content {
-  max-width: 60dvw;
+  max-width: 80dvw;
   margin: auto;
   @apply p-24 flex flex-col gap-8;
 }

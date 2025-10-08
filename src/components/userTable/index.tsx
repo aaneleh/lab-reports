@@ -3,6 +3,7 @@ import { User } from "@/types/user";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
+import Row from "../row";
 
 export default function UserTable() {
 
@@ -10,21 +11,18 @@ export default function UserTable() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     useEffect(()=> {
-      const getUsers = async():Promise<User[] | []> => {
-  
-          await axios.get(`${API_URL}/users`).then((res) => {
-              console.log(res)
-              setUsers(res.data.data)
-              return 
-          }).catch((err) => {
-              console.log("err",err.status)
-          })
-  
-          return [];
-      };
-
-      getUsers();
-  }, [])
+        const getUsers = async():Promise<User[] | []> => {
+            await axios.get(`${API_URL}/users`).then((res) => {
+                console.log(res)
+                setUsers(res.data.data)
+                return 
+            }).catch((err) => {
+                console.log("err",err.status)
+            })
+            return [];
+        };
+        getUsers();
+    }, [])
 
     async function handleClick(uuid: string | undefined): Promise<void> {
         await axios.delete(`${API_URL}/users`, {params: { uuid: uuid}}).then((res) => {
@@ -36,20 +34,20 @@ export default function UserTable() {
     }
 
   return (
-    <div>
-        <div className="flex">
-            <p> NOME </p>
-            <p> ADMIN? </p>
-            <p> AÇÕES </p>
-        </div>
+    <div role="table">
+        <Row className="bg-teal-700 text-white font-semibold" cells={[
+            <p> Nome </p>,
+            <p> Tipo </p>,
+            <p> Ações </p>
+        ]}/>
         { users.map((el : User, key : number)=>
-        <div key={key} className="flex">
-            <p> {el.name} </p>
-            <p> {el.admin ? "Admin" : "Usuário"} </p>
-            <p onClick = {()=> handleClick(el.uuid)}>
-                <MdDeleteForever />
-            </p>
-        </div>
+            <Row key={key} cells={[
+                <p>{el.name}</p>,
+                <p>{el.admin ? "Admin" : "Usuário"}</p>,
+                <p onClick = {()=> handleClick(el.uuid)} className="text-2xl">
+                    <MdDeleteForever />
+                </p>
+            ]}/>
         )}
     </div>
   );
