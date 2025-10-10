@@ -1,13 +1,13 @@
 # Lab-Reports
 
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" width="20px" /> Next.js  
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="20px" /> TailwindCSS  
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-plain.svg" width="20px" /> PostgreSQL  
 
 ## TODO
 
-🟨 Modal para cadastro de users  
+⬜ Variantes para componente Botão e suporte para onClick
+✅ Modal para cadastro de users  
 ✅ Tabela listando todos users  
 ✅ Ação de exclusão para users  
 ✅ Checagem se usuário logado é admin  
