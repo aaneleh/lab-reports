@@ -6,7 +6,7 @@
 
 ## TODO
 
-⬜ Variantes para componente Botão e suporte para onClick
+🟨 Variantes para componente Botão e suporte para onClick
 ✅ Modal para cadastro de users  
 ✅ Tabela listando todos users  
 ✅ Ação de exclusão para users  
