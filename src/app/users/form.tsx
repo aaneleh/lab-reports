@@ -1,9 +1,10 @@
-import Input from "../input";
-import Button from "../button";
-import { createUser } from "@/lib/actions";
-import { User } from "@/types/user";
+import Input from "../../components/input";
+import Button from "../../components/button";
 
-export default function UserModal() {
+import { User } from "@/types/user";
+import { createUser } from "./actions";
+
+export default function UserForm() {
 
   return (
     <form action={
@@ -14,7 +15,7 @@ export default function UserModal() {
             let formAdmin = formData.get('admin')=='on'?true:false;
 
             if(formPassword === formData.get('password_confirmation') &&
-            formName != null && formPassword != null &&
+            formName != '' && formPassword != '' &&
             typeof formName === "string" && typeof formPassword === "string"
             ) {
                 const user : User = {name: formName, password: formPassword, admin: formAdmin};

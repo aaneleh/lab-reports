@@ -3,7 +3,7 @@ import { User } from "@/types/user";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import Row from "../row";
+import Row from "../../components/row";
 
 export default function UserTable() {
 
