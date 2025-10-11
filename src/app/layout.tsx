@@ -1,8 +1,8 @@
-import Navbar from "@/components/navbar";
+import Navbar from "@/ui/navbar";
 import "./globals.css";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/ui/sidebar";
 import { getSession } from "@/lib/actions";
-import Login from "./login/page";
+import Login from "./(pages)/login/page";
 
 export default async function RootLayout({
   children,

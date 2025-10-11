@@ -1,5 +1,5 @@
-import Input from "../../components/input";
-import Button from "../../components/button";
+import Input from "../../../ui/input";
+import Button from "../../../ui/button";
 
 import { User } from "@/types/user";
 import { createUser } from "./actions";

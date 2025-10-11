@@ -1,8 +1,8 @@
-import UserTable from "@/app/users/table";
+import UserTable from "@/app/(pages)/users/table";
 import { getSession } from "@/lib/actions";
 import { redirect } from "next/navigation";
-import ModalTrigger from "@/components/modal";
-import UserForm from "@/app/users/form";
+import ModalTrigger from "@/ui/modal";
+import UserForm from "@/app/(pages)/users/form";
 
 export default async function Users() {
 

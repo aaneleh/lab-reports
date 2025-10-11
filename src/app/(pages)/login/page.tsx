@@ -1,5 +1,5 @@
-import Button from "@/components/button";
-import Input from "@/components/input";
+import Button from "@/ui/button";
+import Input from "@/ui/input";
 import { login } from "@/lib/actions";
 import { User } from "@/types/user";
 import { redirect } from "next/navigation";

@@ -6,7 +6,9 @@
 
 ## TODO
 
-🟨 Variantes para componente Botão e suporte para onClick
+⬜ Componente genérico de tabela
+⬜ Excluir userTable e usar page.tsx com o novo componente de tabela e função getUser em actions.tsx
+✅ Variantes para componente Botão e suporte para onClick
 ✅ Modal para cadastro de users  
 ✅ Tabela listando todos users  
 ✅ Ação de exclusão para users  
