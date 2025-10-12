@@ -7,7 +7,7 @@ const DB_NAME = process.env.DB_NAME;
 
 export async function GET(){
   try {
-    const result = await db.query<any>(`SELECT * FROM "${DB_NAME}".users`);
+    const result = await db.query<any>(`SELECT uuid, name, admin FROM "${DB_NAME}".users`);
 
     return NextResponse.json(
       { data: result.rows },

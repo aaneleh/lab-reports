@@ -6,8 +6,10 @@
 
 ## TODO
 
-⬜ Componente genérico de tabela
-⬜ Excluir userTable e usar page.tsx com o novo componente de tabela e função getUser em actions.tsx
+🟨 Componente genérico de tabela
+⬜ Refetch ao cadastrar ou excluir usuário
+⬜ Toasts de sucesso e erro
+✅ Tornar userTable component server
 ✅ Variantes para componente Botão e suporte para onClick
 ✅ Modal para cadastro de users  
 ✅ Tabela listando todos users  
